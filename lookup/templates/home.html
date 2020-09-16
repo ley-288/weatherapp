@@ -3,8 +3,28 @@
 
 {% block content %}
 
-<h1>Hello World!</h1>
+
+
 <br/>
-{{ api }}
+
+{% if zipcode %} <!--if there is a zipcode (name from views.py), print zipcode-->
+    {{ zipcode }}
+{% endif %}
+
+{% if api %}
+    {% if api == "Error..." %}
+        There was an error, please try again...
+    {% else %}
+
+    <div class="jumbotron {{ category_color }}"> <!--change colour to colour assigned in views.py-->
+        <h1 class="display-4">{{ api.0.Category.Name }}</h1>
+        <p class="lead">Current: {{ api.0.ReportingArea }} Air Quality: {{ api.0.AQI }}</p>
+        
+       <p>{{ category_description }}</p>
+        
+      </div>
+
+    {% endif %}
+{% endif %}
 
 {% endblock %}
